@@ -1,0 +1,148 @@
+---
+title: "Finite State Machines with XState for Game Development using Three.js"
+authors: ["Henrique Ramos"]
+publishedAt: 2024-12-13
+description: "Using XState Finite State Machines to coordinate character actions in a Three.js game"
+---
+
+<section>
+  <section>
+    <h2>What is a Finite State Machine (FSM)?</h2>
+    <ul>
+      <li>
+        A mathematical model of computation that consists of a set of states and
+        transitions between those states.
+      </li>
+      <li>Used to represent systems with a finite number of states.</li>
+      <li>Well-suited for modeling complex game behaviors.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Visualizing FSMs</h2>
+    <iframe
+      title="Stately.AI FSM visualization"
+      src="https://stately.ai/registry/editor/embed/f135a841-e83d-4bdc-8a86-9ebe0f8ff3cd?machineId=9e9d23aa-1c58-44a7-a20d-538fc7017e37"
+      width="1000"
+      height="600"
+    ></iframe>
+  </section>
+</section>
+<section>
+  <h2>Why use FSMs in Game Development?</h2>
+  <ul>
+    <li>Improve code organization and readability.</li>
+    <li>Facilitate easier testing and debugging.</li>
+    <li>Enable more flexible and reactive game behaviors.</li>
+    <li>Promote code reusability.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Introducing XState</h2>
+  <ul>
+    <li>
+      A powerful and flexible state chart library for building complex state
+      machines.
+    </li>
+    <li>
+      Well-suited for game development due to its visual state charts and
+      hierarchical state machines.
+    </li>
+    <li>Provides a declarative approach to state machine design.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Key Features of XState</h2>
+  <ul>
+    <li>Visual state charts for intuitive design.</li>
+    <li>Hierarchical state machines for complex behaviors.</li>
+    <li>Context and actions for managing state data and side effects.</li>
+    <li>Guards and conditions for controlling transitions.</li>
+    <li>Parallel states for concurrent behaviors.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Integrating XState with Three.js</h2>
+  <ul>
+    <li>Create a Three.js scene and renderer.</li>
+    <li>Define game objects and their initial states.</li>
+    <li>Initialize an XState machine to manage the game's overall state.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Mapping XState States to Game Objects</h2>
+  <ul>
+    <li>Use XState's context to store references to game objects.</li>
+    <li>Define actions to update game object properties and behaviors.</li>
+    <li>Trigger state transitions based on game events or conditions.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Handling Game Events and Input</h2>
+  <ul>
+    <li>Listen for user input events (e.g., keyboard, mouse, gamepad).</li>
+    <li>
+      Use XState's
+      <code>send</code>
+      function to trigger state transitions based on input.
+    </li>
+    <li>Update game object states and behaviors accordingly.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Advanced Techniques</h2>
+  <ul>
+    <li>Parallel States</li>
+    <li>History States</li>
+    <li>Delay Transitions</li>
+    <li>Custom Guards and Conditions</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Conclusion</h2>
+
+By leveraging XState, you can create more robust, flexible, and maintainable
+game behaviors. XState's powerful features and intuitive state chart design
+make it an excellent choice for game development using Three.js.
+
+</section>
+<section>
+  <h2>Finite State Machine</h2>
+  <iframe
+    height="600"
+    width="1000"
+    title="HNRQ.dev character FSM"
+    src="https://stately.ai/registry/editor/embed/d947654c-2a61-4870-bc38-d34a5224ea00?machineId=b2a3771b-2530-4ce7-9f71-380eee380537"
+  ></iframe>
+</section>
+<section>
+  <h2>FSM in action</h2>
+  <iframe src="https://hnrq.dev" title="HNRQ.dev" height="600" width="1000"></iframe>
+  <small>Available at <a href="https://hnrq.dev">hnrq.dev</a></small>
+</section>
+
+<section>
+  <h2>References</h2>
+  <ul>
+    <li>
+      XState Documentation:
+      <a href="https://xstate.js.org/">https://xstate.js.org/</a>
+    </li>
+    <li>
+      Three.js Documentation:
+      <a href="https://threejs.org/">https://threejs.org/</a>
+    </li>
+    <li>
+      Finite State Machines:
+      <a href="https://en.wikipedia.org/wiki/Finite-state_machine"
+        >https://en.wikipedia.org/wiki/Finite-state_machine</a
+      >
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,21 @@
+---
+import SlideLayout from "@layouts/SlideLayout.astro";
+import { getCollection } from "astro:content";
+// 1. Generate a new path for every collection entry
+export const getStaticPaths = async () =>
+  (await getCollection("presentations")).map((presentation) => ({
+    params: { slug: presentation.slug },
+    props: { presentation },
+  }));
+
+const { presentation } = Astro.props;
+const { Content } = await presentation.render();
+---
+
+<SlideLayout
+  title={presentation.data.title}
+  authors={presentation.data.authors}
+  description={presentation.data.description}
+>
+  <Content />
+</SlideLayout>
