@@ -14,10 +14,19 @@ const { title, authors, description } = Astro.props;
   <Fragment slot="head">
     {description && <meta name="description" content={description} />}
     {authors.map((author) => <meta name="author" content={author} />)}
-    <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
     <link
       rel="stylesheet"
-      href="/node_modules/reveal.js/plugin/highlight/monokai.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css"
+      integrity="sha512-V5fKCVKOFy36w8zJmLzPH5R6zU6KvuHOvxfMRczx2ZeqTjKRGSBO9yiZjCKEJS3n6EmENwrH/xvSwXqxje+VVA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/highlight/monokai.css"
+      integrity="sha512-Ww3X8n7Y0V9xFWft1PYfLEESkLKZYjWHmaZgo6HZu4R0mX5D+sNK5YoLSgE10aS2SDXnppWRXndYiN7n/LxV3A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
   </Fragment>
   <div class="reveal">
