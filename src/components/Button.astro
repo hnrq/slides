@@ -1,0 +1,21 @@
+<button><slot /></button>
+
+<style>
+  button {
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    transition-duration: 0.3s;
+    border: 2px solid white;
+    transition-property: color, background-color;
+    font-weight: bold;
+    transition-timing-function: ease-in-out;
+  }
+
+  button:hover {
+    cursor: pointer;
+    color: black;
+    background: white;
+  }
+</style>
