@@ -1,0 +1,148 @@
+---
+import Button from "@components/Button.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<script>
+  const STAR_COUNT = 10000;
+
+  let width: number;
+  let height: number;
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  let previousTime: number;
+
+  interface Star {
+    x: number;
+    y: number;
+    z: number;
+  }
+
+  export const clear = (
+    context: CanvasRenderingContext2D | null,
+    canvas: HTMLCanvasElement
+  ) => {
+    if (context) context.fillStyle = "#04000d";
+    context?.fillRect(0, 0, canvas.width, canvas.height);
+  };
+
+  export const drawPixel = (
+    context: CanvasRenderingContext2D | null,
+    x: number,
+    y: number,
+    brightness: number
+  ) => {
+    const intensity = brightness * 255;
+    if (context)
+      context.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    context?.fillRect(x, y, 2, 2);
+  };
+
+  export const moveStars = (stars: Star[], distance: number) => {
+    stars.forEach((star) => {
+      star.z = star.z <= 1 ? star.z + 1000 : star.z - distance;
+    });
+  };
+
+  const stars = Array.from({ length: STAR_COUNT }, () => ({
+    x: Math.random() * 1600 - 800,
+    y: Math.random() * 900 - 450,
+    z: Math.random() * 1000,
+  }));
+
+  const setCanvasExtents = () => {
+    width = document.body.clientWidth;
+    height = document.body.clientHeight;
+    canvas.width = width;
+    canvas.height = height;
+  };
+
+  setCanvasExtents();
+
+  addEventListener("resize", () => {
+    setCanvasExtents();
+  });
+
+  const context = canvas.getContext("2d");
+
+  const tick = (time: number) => {
+    let elapsed = time - previousTime;
+    previousTime = time;
+
+    moveStars(stars, elapsed * 0.05);
+
+    clear(context, canvas);
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    stars.forEach((star) => {
+      const x = centerX + star.x / (star.z * 0.001);
+      const y = centerY + star.y / (star.z * 0.001);
+
+      if (x >= 0 && x <= width && y >= 0 && y <= height) {
+        const d = star.z / 1000.0;
+        const b = 1 - d * d;
+
+        drawPixel(context, x, y, b);
+      }
+    });
+
+    requestAnimationFrame(tick);
+  };
+
+  const init = (time: number) => {
+    previousTime = time;
+    requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(init);
+</script>
+
+<BaseLayout title="404">
+  <section class="error-404">
+    <canvas id="canvas" class="starfield"></canvas>
+    <div class="content">
+      <h2 class="subheading subheading--mono">
+        Error 404. Simulation disengaged. Critical cube disruption. Course
+        correcting...
+      </h2>
+      <div class="button__container">
+        <a href="/">
+          <Button>reboot</Button>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  body {
+    margin: 0;
+    color: white;
+    font-family: monospace;
+  }
+
+  .error-404 {
+    height: 100vh;
+    background-color: black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .error-404 .starfield {
+    position: absolute;
+  }
+
+  .error-404 .content {
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: calc(2 * var(--base-spacing));
+    align-items: center;
+    gap: calc(2 * var(--base-spacing));
+    max-width: 40rem;
+  }
+</style>
