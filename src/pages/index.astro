@@ -1,11 +1,59 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const slides = (await getCollection("slides")).sort((c1, c2) =>
+  c1.data.title > c2.data.title ? -1 : 1
+);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+  <h1>Slides</h1>
+  <p>Here you can find a list of all available slides:</p>
+  {
+    slides.map((slide) => (
+      <a href={`/${slide.id}`}>
+        <h2>{slide.data.title}</h2>
+        <p>{slide.data.description}</p>
+        <small>{slide.data.publishedAt.toLocaleDateString()}</small>
+      </a>
+    ))
+  }
 </Layout>
+
+<style lang="scss">
+  @use "@themes/hnrq";
+
+  body {
+    background-color: hnrq.$backgroundColor;
+    color: hnrq.$mainColor;
+    font-family: hnrq.$mainFont;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body > * {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: hnrq.$headingFont;
+  }
+
+  a {
+    padding: 2rem;
+    color: hnrq.$mainColor;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background: hnrq.$mainColor;
+      color: hnrq.$backgroundColor;
+    }
+  }
+</style>
