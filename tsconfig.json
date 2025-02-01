@@ -1,17 +1,20 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@themes/*": ["src/themes/*"]
-    },
-    "moduleResolution": "Bundler",
-    "strictNullChecks": true,
-    "allowJs": true
-  },
-  "exclude": ["dist"]
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@layouts/*": ["src/layouts/*"],
+			"@assets/*": ["src/assets/*"],
+			"@theme/*": ["src/theme/*"],
+			"@theme": ["src/theme/index.css"],
+			"@slides/*": ["src/slides/*"],
+			"@utils/*": ["src/utils/*"]
+		},
+		"moduleResolution": "Bundler",
+		"strictNullChecks": true,
+		"allowJs": true
+	},
+	"exclude": ["dist"]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "presentations",
+  "name": "slides",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,11 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.0.5",
-    "reveal.js": "^5.1.0",
-    "sass": "^1.83.0"
+    "astro": "^5.2.3",
+    "reveal.js": "^5.1.0"
   },
   "devDependencies": {
-    "@types/reveal.js": "^5.0.4"
+    "@biomejs/biome": "^1.9.4",
+    "@types/reveal.js": "^5.0.5"
   }
 }
