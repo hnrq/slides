@@ -1,10 +1,8 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getSlides } from "@utils/getSlides";
 
-const slides = (await getCollection("slides")).sort((c1, c2) =>
-  c1.data.title > c2.data.title ? -1 : 1
-);
+const slides = getSlides().sort((c1, c2) => (c1.title > c2.title ? -1 : 1));
 ---
 
 <Layout title="Home">
@@ -13,21 +11,21 @@ const slides = (await getCollection("slides")).sort((c1, c2) =>
   {
     slides.map((slide) => (
       <a href={`/${slide.id}`}>
-        <h2>{slide.data.title}</h2>
-        <p>{slide.data.description}</p>
-        <small>{slide.data.publishedAt.toLocaleDateString()}</small>
+        <h2>{slide.title}</h2>
+        <p>{slide.description}</p>
+        <small>{new Date(slide.publishedAt).toLocaleDateString()}</small>
       </a>
     ))
   }
 </Layout>
 
-<style lang="scss">
-  @use "@themes/hnrq";
+<style>
+  @import "@theme";
 
   body {
-    background-color: hnrq.$backgroundColor;
-    color: hnrq.$mainColor;
-    font-family: hnrq.$mainFont;
+    background-color: var(--background);
+    color: var(--main-color);
+    font-family: var(--main-font);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -43,17 +41,17 @@ const slides = (await getCollection("slides")).sort((c1, c2) =>
   h4,
   h5,
   h6 {
-    font-family: hnrq.$headingFont;
+    font-family: var(--heading-font);
   }
 
   a {
     padding: 2rem;
-    color: hnrq.$mainColor;
+    color: var(--main-color);
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
+    transition: filter 0.2s ease-in-out;
+    background-color: var(--background);
     &:hover {
-      background: hnrq.$mainColor;
-      color: hnrq.$backgroundColor;
+      filter: invert(1);
     }
   }
 </style>
