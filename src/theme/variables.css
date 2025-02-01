@@ -1,0 +1,37 @@
+:root {
+	--background: #000;
+	--background-color: #bbb;
+
+	--main-font: "Anaheim", sans-serif;
+	--main-font-size: 40px;
+	--main-color: #eee;
+
+	--block-margin: 20px;
+
+	--heading-margin: 0 0 20px 0;
+	--heading-font: "Overpass Mono", monospace;
+	--heading-color: #fff;
+	--heading-line-height: 1.2;
+	--heading-letter-spacing: normal;
+	--heading-text-transform: none;
+	--heading-text-shadow: #aaa;
+	--heading-font-weight: 800;
+	--heading1-text-shadow: #aaa;
+
+	--heading1-size: 3.77em;
+	--heading2-size: 3.5rem;
+	--heading3-size: 1.55em;
+	--heading4-size: 1em;
+
+	--code-font: monospace;
+
+	--link-color: #aaaaff;
+	--link-color-dark: color.scale(#aaaaff, $lightness: -15%);
+	--link-color-hover: color.scale(#aaaaff, $lightness: 20%);
+
+	--selection-background-color: #888;
+	--selection-color: #fff;
+
+	--overlay-element-bg-color: 0, 0, 0;
+	--overlay-element-fg-color: 240, 240, 240;
+}
