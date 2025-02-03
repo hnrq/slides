@@ -1,8 +1,9 @@
 import type { AstroInstance } from "astro";
+import { type } from "arktype";
 
 type Opts<T extends Record<string, unknown>> = {
 	files: Record<string, T>;
-	requiredFields?: string[];
+	schema: type;
 };
 
 /**
@@ -14,16 +15,12 @@ type Opts<T extends Record<string, unknown>> = {
  */
 const getAstroPages = <T extends Record<string, unknown> & AstroInstance>({
 	files,
-	requiredFields = [],
+	schema,
 }: Opts<T>) =>
 	Object.values(files).map((module) => {
-		if (!requiredFields.every((field) => module[field as keyof T])) {
-			throw new Error(
-				`Missing required fields for ${module.file}: ${requiredFields
-					.filter((field) => !module[field as keyof T])
-					.join(", ")}`,
-			);
-		}
+		const validate = schema(module);
+		if (validate instanceof type.errors)
+			return console.error(`Invalid module${module.file}: ${validate.summary}`);
 
 		return {
 			id: (

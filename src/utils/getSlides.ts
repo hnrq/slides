@@ -1,5 +1,6 @@
 import type { AstroInstance } from "astro";
 import getAstroPages from "./getAstroPages";
+import { type } from "arktype";
 
 type Slide = AstroInstance & {
 	[key: string]: unknown;
@@ -9,8 +10,7 @@ type Slide = AstroInstance & {
 	publishedAt: string;
 };
 
-const slideRequiredFields = ["title", "description", "authors", "publishedAt"];
-
+/**
 /**
  * Get all slides from the slides directory.
  * @returns The slides.
@@ -21,5 +21,10 @@ export const getSlides = () =>
 			["@slides/**/index.astro", "@slides/*.astro"],
 			{ eager: true },
 		),
-		requiredFields: slideRequiredFields,
+		schema: type({
+			title: "string",
+			description: "string",
+			authors: "string[]",
+			publishedAt: "string",
+		}),
 	});

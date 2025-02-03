@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/reveal.js": "^5.0.5"
+    "@types/reveal.js": "^5.0.5",
+    "arktype": "^2.0.4"
   }
 }
