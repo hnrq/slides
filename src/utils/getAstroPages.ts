@@ -6,6 +6,10 @@ type Opts<T extends Record<string, unknown>> = {
 	schema: type;
 };
 
+const astroPageType = type({
+	"draft?": "boolean",
+});
+
 /**
  * Get all Astro pages from a given path.
  * @param opts - The options for the function.
@@ -17,19 +21,23 @@ const getAstroPages = <T extends Record<string, unknown> & AstroInstance>({
 	files,
 	schema,
 }: Opts<T>) =>
-	Object.values(files).map((module) => {
-		const validate = schema(module);
-		if (validate instanceof type.errors)
-			return console.error(`Invalid module${module.file}: ${validate.summary}`);
+	Object.values(files)
+		.filter(({ draft }) => !draft)
+		.map((module) => {
+			const validate = schema.and(astroPageType)(module);
+			if (validate instanceof type.errors)
+				return console.error(
+					`Invalid module${module.file}: ${validate.summary}`,
+				);
 
-		return {
-			id: (
-				module.file
-					.split("/")
-					.at(module.file.includes("index.astro") ? -2 : -1) ?? ""
-			).replace(".astro", ""),
-			...module,
-		};
-	});
+			return {
+				id: (
+					module.file
+						.split("/")
+						.at(module.file.includes("index.astro") ? -2 : -1) ?? ""
+				).replace(".astro", ""),
+				...module,
+			};
+		});
 
 export default getAstroPages;
