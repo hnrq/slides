@@ -1,6 +1,7 @@
 :root {
 	--background: #000;
 	--background-color: #000;
+	--base-spacing: 8px;
 
 	--main-font: "Anaheim", sans-serif;
 	--main-font-size: 40px;
@@ -26,8 +27,8 @@
 	--code-font: monospace;
 
 	--link-color: #aaaaff;
-	--link-color-dark: color.scale(#aaaaff, $lightness: -15%);
-	--link-color-hover: color.scale(#aaaaff, $lightness: 20%);
+	--link-color-dark: color-mix(in srgb, var(--link-color), #000 10%);
+	--link-color-hover: color-mix(in srgb, var(--link-color), #000 20%);
 
 	--selection-background-color: #888;
 	--selection-color: #fff;

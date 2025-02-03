@@ -2,7 +2,9 @@
 import Layout from "@layouts/BaseLayout.astro";
 import { getSlides } from "@utils/getSlides";
 
-const slides = getSlides().sort((c1, c2) => (c1.title > c2.title ? -1 : 1));
+const slides = getSlides()
+	.filter(({ draft }) => !draft)
+	.sort((c1, c2) => (c1.title > c2.title ? -1 : 1));
 ---
 
 <Layout title="Home">

@@ -8,6 +8,7 @@ type Slide = AstroInstance & {
 	description: string;
 	authors: string[];
 	publishedAt: string;
+	draft?: boolean;
 };
 
 /**

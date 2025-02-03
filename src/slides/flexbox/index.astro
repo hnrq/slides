@@ -1,4 +1,6 @@
 ---
+import CSSPropertyDemo from "./components/CSSPropertyDemo.svelte";
+
 export const title = "CSS Flexbox";
 export const authors = ["Henrique Ramos"];
 export const publishedAt = "2025-01-27";
@@ -16,78 +18,35 @@ export const draft = true;
 </section>
 
 <section>
-  <h2>Basic Flexbox Container</h2>
-  <div class="demo">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-  </div>
-  <pre><code data-trim>
-.container {'{'}
-  display: flex;
-{'}'}
-</code></pre>
+  <CSSPropertyDemo
+    title="Simple Flexbox Container"
+    client:load
+    property="display"
+    values={["flex"]}
+  />
 </section>
 
 <section>
-  <h2>justify-content</h2>
-  <div class="demo" style="justify-content: space-between">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-  </div>
-  <pre><code data-trim>
-.container {'{'}
-  justify-content: space-between;
-{'}'}
-</code></pre>
+  <CSSPropertyDemo
+    client:load
+    property="justify-content"
+    values={["flex-start", "center", "flex-end", "space-between", "space-around", "space-evenly"]}
+  />
 </section>
 
 <section>
-  <h2>align-items</h2>
-  <div class="demo" style="align-items: center; height: 300px">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-  </div>
-  <pre><code data-trim>
-.container {'{'}
-  align-items: center;
-{'}'}
-</code></pre>
+  <CSSPropertyDemo
+    client:load
+    property="align-items"
+    values={["flex-start", "center", "flex-end", "stretch"]}
+  />
 </section>
 
 <section>
-  <h2>flex-direction</h2>
-  <div class="demo" style="flex-direction: column">
-    <div class="box">1</div>
-    <div class="box">2</div>
-    <div class="box">3</div>
-  </div>
-  <pre><code data-trim>
-.container {'{'}
-  flex-direction: column;
-{'}'}
-</code></pre>
+  <CSSPropertyDemo
+    client:load
+    property="flex-direction"
+    values={["row", "row-reverse", "column", "column-reverse"]}
+  />
 </section>
 
-
-<style>
-      .demo {
-        display: flex;
-        margin: 20px;
-        padding: 20px;
-        border: 2px solid #fff;
-        min-height: 200px;
-      }
-      .box {
-        width: 100px;
-        height: 100px;
-        background: #4a9eff;
-        margin: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-      }
-    </style>
