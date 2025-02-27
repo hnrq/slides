@@ -1,26 +1,26 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
+import type { Snippet } from "svelte";
 
-  type CSSPropertyDemoProps = {
-    property: string;
-    values: string[];
-    title?: string;
-    defaultValue?: string;
-    children?: Snippet<[]>;
-  };
+type CSSPropertyDemoProps = {
+  property: string;
+  values: string[];
+  title?: string;
+  defaultValue?: string;
+  children?: Snippet<[]>;
+};
 
-  const {
-    property,
-    values,
-    title = property,
-    defaultValue = values[0],
-  }: CSSPropertyDemoProps = $props();
+const {
+  property,
+  values,
+  title = property,
+  defaultValue = values[0],
+}: CSSPropertyDemoProps = $props();
 
-  let selected = $state(defaultValue);
+let selected = $state(defaultValue);
 
-  const handleClick = (value: string) => {
-    selected = value;
-  };
+const handleClick = (value: string) => {
+  selected = value;
+};
 </script>
 
 <div class="flex-property-demo">

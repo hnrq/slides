@@ -3,7 +3,7 @@ import SlideLayout from "@layouts/SlideLayout.astro";
 import { getSlides } from "@utils/getSlides";
 
 export const getStaticPaths = () =>
-	getSlides().map((slide) => ({ params: { id: slide.id }, props: { slide } }));
+  getSlides().map((slide) => ({ params: { id: slide.id }, props: { slide } }));
 
 const { slide } = Astro.props;
 ---
