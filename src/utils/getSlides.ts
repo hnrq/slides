@@ -2,14 +2,9 @@ import type { AstroInstance } from "astro";
 import getAstroPages from "./getAstroPages";
 import { type } from "arktype";
 
-type Slide = AstroInstance & {
-	[key: string]: unknown;
-	title: string;
-	description: string;
-	authors: string[];
-	publishedAt: string;
-	draft?: boolean;
-};
+const schema = type({ title: "string", description: "string", authors: "string[]", publishedAt: "string" });
+
+type Slide = AstroInstance & typeof schema.infer & { [key: string]: unknown };
 
 /**
 /**
@@ -22,10 +17,5 @@ export const getSlides = () =>
 			["@slides/**/index.astro", "@slides/*.astro"],
 			{ eager: true },
 		),
-		schema: type({
-			title: "string",
-			description: "string",
-			authors: "string[]",
-			publishedAt: "string",
-		}),
+		schema,
 	});
