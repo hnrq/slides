@@ -1,0 +1,149 @@
+---
+export const title = "Refactoring the Design System for a Monorepo architecture";
+export const authors = ["Henrique Ramos"];
+export const publishedAt = "2025-04-10";
+export const description = "Do you even flex?";
+export const draft = false;
+---
+
+<section>
+  <section>
+    <h2>Challenges of Current Architecture</h2>
+    <ul>
+      <li>Code duplication across projects</li>
+      <li>Difficulties in maintaining consistent design standards</li>
+      <li>Slow build times due to large codebase</li>
+      <li>Bloated dependencies on Web</li>
+      <li>TypeScript and Linting errors on Platform-specific codes</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Examples</h2>
+    <ul>
+      <li>Multiple config files on root</li>
+      <pre class="m-0 w-full">
+        <code>
+src/
+  ---mobile
+  ---shared
+  ---tokens
+  ---web
+jest.config.js
+jest.config.web.js
+jest.setup.js
+jest.setup.web.js
+        </code>
+      </pre>
+      <li>Convoluted build commands:</li>
+      <pre>
+          <code>
+"copy-assets": "cp -r src-ts/shared/assets src/shared/",
+"copy-styles": "find src-ts -name '*.css' -exec sh -c 'mkdir -p src/$(dirname {}|cut -c8-) && cp {} src/$(dirname {}|cut -c8-)/' \\;",
+"build": "tsc --project tsconfig.json && npx tsc-alias -p tsconfig.json && mv src src-ts && mv dist src && npm run copy-assets && npm run copy-styles",
+          </code>
+        </pre>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>What is a Monorepo?</h2>
+  <ul>
+    <li>Multiple projects, a single Git repository</li>
+    <li>Simplified code sharing</li>
+    <li>Easier per-project tooling setup</li>
+  </ul>
+</section>
+
+<section>
+  <section>
+    <h2>Architecture</h2>
+    <ul>
+      <li><code>@jitb/design-core</code> for platform-agnostic code and assets</li>
+      <li><code>@jitb/design-web</code> for web and <code>@jitb/design-mobile</code> for mobile-specific code</li>
+      <li><code>@jitb/storybook</code> for Storybook codeviews</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Folder structure</h2>
+    <pre>
+      <code>
+design-system
+  ├── package.json
+  ├── tsconfig.base.json
+  ├── storybook
+  │   ├── .storybook
+  │   ├── stories
+  │   ├── storybook-static
+  │   ├── CHANGELOG.md
+  │   ├── env.d.ts
+  │   ├── eslint.config.mjs
+  │   └── tsconfig.json
+  packages
+    ├── core
+    │    ├── assets
+    │    ├── src
+    │    ├── eslint.config.mjs
+    │    ├── package.json
+    │    ├── rollup.config.js
+    │    ├── setupTests.ts
+    │    ├── tsconfig.build.json
+    │    ├── tsconfig.json
+    │    └── vitest.config.mts
+    ├── mobile
+    │    ├── __mocks__
+    │    ├── src
+    │    ├── babel.config.cjs
+    │    ├── eslint.config.mjs
+    │    ├── jest.setup.js
+    │    ├── package.json
+    │    ├── rollup.config.js
+    │    └── tsconfig.json
+    └── web
+        ├── src
+        ├── eslint.config.mjs
+        ├── package.json
+        ├── rollup.config.js
+        ├── setupTests.ts
+        ├── tsconfig.json
+        └── vitest.config.mts
+        </code>
+      </pre>
+  </section>
+</section>
+
+<section>
+  <h2>Technologies used</h2>
+  <ul>
+    <li>TypeScript</li>
+    <li>PNPM Workspaces</li>
+    <li>Nx</li>
+    <li>Rollup</li>
+  </ul>
+</section>
+
+<section>
+  <section><h2>What changed?</h2>
+  <ul>
+    <li>Replace <b>macos.m1.medium</b> executor by <b>docker.large</b>, using <b>8x less credits/min</b> 150 - 20</li>
+    <li>Reduced web bundle size from <b>3.78MB</b> to <b>2.2MB</b></li>
+    <li>Script caching, reducing CI times by <b>30%</b></li>
+    <li>Improved DX with per-project setups</li>
+    <li>Script orchestration by NX</li>
+  </ul>
+  </section>
+  <section>
+    <code>pnpm test:watch:ui</code>
+    <iframe width="100%" height="500px" src="http://localhost:51204/__vitest__/#/" />
+  </section>
+
+  <section>
+    <code>pnpm nx graph</code>
+    <iframe width="100%" height="500px" src="http://127.0.0.1:4211/projects" />
+  </section>
+</section>
+
+<section>
+  <h2>Thank you :D</h2>
+</section>
